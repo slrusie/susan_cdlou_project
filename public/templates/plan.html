@@ -1,0 +1,10 @@
+<div class="item" ng-class="{'editing-item': editing, 'edited': plan.edited, 'completed': plan.completed}" ng-repeat="plan in plans | orderBy: 'completed' " ng-init="plan.completed = false">
+      <label ng-hide="save" ng-click="save=true">{{plan.name}}</label>
+      <input ng-show="save" ng-blur="save = false" class="save-label" type="text" ng-model="plan.name" ng-change="plan.saved = true"/>
+	  <label ng-hide="editing" ng-click="editing=true">{{plan.plan}}</label>
+      <input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="plan.plan" ng-change="plan.edited = true"/>
+      <div class="actions">
+        <a href="" ng-click="savePlans()">Save</a>
+        <a href="" class="delete" ng-click="deletePlan(plan, $index)">Delete</a>
+      </div>
+    </div>
