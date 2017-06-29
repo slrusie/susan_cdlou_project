@@ -102,12 +102,32 @@ webpackJsonp([0],[
 
 	var angular = __webpack_require__(1);
 
-	angular.module('lessonPlanApp').controller('mainCtrl', __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./main\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+	angular.module('lessonPlanApp').controller('mainCtrl', __webpack_require__(8));
 	angular.module('lessonPlanApp').controller('planCtrl', __webpack_require__(9));
 
 
 /***/ },
-/* 8 */,
+/* 8 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	function MainCtrl($scope, $filter, $http, dataService) {
+	  dataService.getPlans(function(response){
+	    var plans = response.data.plans;
+	    $scope.plans =  plans;
+	  });
+
+	  $scope.addPlan = function() {
+	    $scope.plans.unshift({name: "This is a new plan.",
+	                      completed: false});
+	  };
+
+	}
+
+	module.exports = MainCtrl;
+
+/***/ },
 /* 9 */
 /***/ function(module, exports) {
 

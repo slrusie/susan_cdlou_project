@@ -6,35 +6,28 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></link>
 </head>
-<body ng-app = "lessonPlanApp">
+<body ng-app = "lessonPlanApp" ng-controller="mainCtrl">
 
 <ng-include src="'templates/plan.html'"></ng-include>
 
 <h1>LESSON PLAN</h1>
-hover table-condensed">
-    <tr style="font-weight: bold">
-      <td style="width:40%"></td>
-      <td style="width:40%"></td>
-      <td style="width:20%"></td>
-    </tr>
+ <table class="table table-hover table-condensed table-striped table-bordered">
     <tr ng-repeat="plan in plans">
       <td>
-        <!-- editable plan.name (text with validation) -->
-        <span editable-text="plan.name" e-form="rowform" onbeforesave="checkPlan($data, plan.id)">
+        <!-- editable username (text with validation) -->
+        <span editable-text="plan.name" e-name="name" e-form="rowform">
           {{ plan.name || 'empty' }}
         </span>
       </td>
       <td>
-        <!-- editable plan.plan (select-local) -->
-        <span editable-select="plan.plan" e-form="rowform" e-ng-options="checkPlan($data, name.id)">
-          {{ showPlan(plan) }}
-      </td>
-      <td>
-       
+        <!-- editable status (select-local) -->
+        <span editable-select="plan.plan" e-name="plan" e-form="rowform">
+          {{ plan.plan }}
+        </span>
       </td>
       <td style="white-space: nowrap">
         <!-- form -->
-        <form editable-form name="rowform" onbeforesave="savePlan($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == plan">
+        <form editable-form name="rowform" onbeforesave="savePlan($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
           <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
             save
           </button>
@@ -44,17 +37,15 @@ hover table-condensed">
         </form>
         <div class="buttons" ng-show="!rowform.$visible">
           <button type="button" class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-          <button type="button" class="btn btn-danger" ng-click="removePlan($index)">del</button>
+          <button type="button" class="btn btn-danger" ng-click="removeUser($index)">del</button>
         </div>  
       </td>
     </tr>
   </table>
 
-  <button type="button" class="btn btn-default" ng-click="addUser()">Add row</button>
-</div>
+  <button type="button" class="btn btn-default" ng-click="addPlan()">Add row</button>
 
-	 <label ng-hide="editing" ng-click="editing=true">{{plan.name}}</label>
-	 <input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="plan.name" ng-change="plan.edited = true"/>
+
 	 <script>
 function myFunction() {
     var x = document.getElementById("lessonPLan");
