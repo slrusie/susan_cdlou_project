@@ -7,7 +7,7 @@ function MainCtrl($scope, $filter, $http, dataService) {
   });
 
   $scope.addPlan = function() {
-    $scope.plans.unshift({name: "This is a new plan.",
+    $scope.plans.unshift({name: "This is a new plan.", plan: "This is a new plan",
                       completed: false});
   };
 

@@ -103,7 +103,8 @@ webpackJsonp([0],[
 	var angular = __webpack_require__(1);
 
 	angular.module('lessonPlanApp').controller('mainCtrl', __webpack_require__(8));
-	angular.module('lessonPlanApp').controller('planCtrl', __webpack_require__(9));
+
+
 
 
 /***/ },
@@ -119,46 +120,13 @@ webpackJsonp([0],[
 	  });
 
 	  $scope.addPlan = function() {
-	    $scope.plans.unshift({name: "This is a new plan.",
+	    $scope.plans.unshift({name: "This is a new plan.", plan: "This is a new plan",
 	                      completed: false});
 	  };
 
 	}
 
 	module.exports = MainCtrl;
-
-/***/ },
-/* 9 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	  function PlanCtrl ($scope, dataService) {
-
-	  $scope.deletePlan = function(plan, index) {
-	    dataService.deletePlan(plan).then(function() {
-	      $scope.plans.splice(index, 1);
-	    });
-	  };
-
-	  $scope.savePlans = function() {
-	    var filteredPlans = $scope.plans.filter(function(plan){
-	      if(plan.edited) {
-	        return plan
-	      };
-	    })
-	    dataService.savePlans(filteredPlans)
-	      .finally($scope.resetPlanState());
-	  };
-
-	  $scope.resetPlanState = function() {
-	      $scope.plans.forEach(function(plan) {
-	         plan.edited = false;
-	      });
-	  }
-	}
-
-	module.exports = PlanCtrl;
 
 
 /***/ }
