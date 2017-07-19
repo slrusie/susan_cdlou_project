@@ -1,40 +1,9 @@
- <table class="table table-hover table-condensed table-striped table-bordered">
- <tr ng-repeat="plan in plans">
-      <td>
-        <!-- editable username (text with validation) -->
-        <span editable-text="plan.name" e-name="name" e-form="rowform">
-		<label ng-hide="save" ng-click="save=true"  {{ plan.name || 'empty' }}
-></label>
-		 <input ng-show="save" ng-blur="save = false" class="save-label" type="text" ng-model="plan.name" ng-change="plan.saved = true"/>
-        </span>
-      </td>
-      <td>
-        <!-- editable status (select-local) -->
-        <span editable-select="plan.plan" e-name="plan" e-form="rowform">
-		<label ng-hide="save" ng-click="save=true"   {{ plan.plan|| 'empty' }}
-></label>
-		   <input ng-show="save" ng-blur="save = false" class="save-label" type="text" ng-model="plan.plan" ng-change="plan.saved = true"/>
-        </span>
-      </td>
-      <td style="white-space: nowrap">
-        <!-- form -->
-        <form editable-form name="rowform" onbeforesave="savePlan($data, plan.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == plan">
-          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
-            save
-          </button>
-          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
-            cancel
-          </button>
-        </form>
-        <div class="buttons" ng-show="!rowform.$visible">
-		  <button type="button" class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-          <button type="button" class="btn btn-danger" ng-click="removeUser($index)">del</button>
-		</div>
-		</td>
-    </tr>
-  </table>
-		
-<button type="button" class="btn btn-default" ng-click="addUser()">Add row</button>
-</div>
+
+
+
+ 
+
+	
+
 		
   
