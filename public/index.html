@@ -38,10 +38,8 @@
           </button>
         </form>
         <div class="buttons" ng-show="!rowform.$visible">
-		<div class="actions">
-          <button type="button" class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-          <button type="button" class="btn btn-danger" ng-click="removePlan($index)">del</button>
-		  </div>
+			<button type="button" class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+			<button type="button" class="btn btn-danger" ng-click="removePlan($index)">del</button>
         </div>  
       </td>
     </tr>
@@ -50,13 +48,19 @@
   <button type="button" class="btn btn-default" ng-click="addPlan()">Add row</button>
 </div>
 
- <script>
-function myFunction() {
-    var x = document.getElementById("lessonPLan");
-    var option = document.createElement("option");
-    option.text = ([]);
-    x.add(option);
-	}
+<script type="text/javascript">
+    function AddItem()
+    {
+        // Create an Option object       
+        var opt = document.createElement("option");        
+
+        // Assign text and value to Option object
+        opt.text = "New Value";
+        opt.value = "New Value";
+
+        // Add an Option object to Drop Down List Box
+        document.getElementById('<%=DropDownList.PlanID%>').options.add(opt);
+    }
 </script>
 
   <script src="/scripts/vendor.bundle.js"></script>

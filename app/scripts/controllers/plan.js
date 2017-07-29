@@ -1,7 +1,7 @@
 'use strict';
 
 app.controller('EditableRowCtrl', function($scope, $filter, $http) {
-
+	
 $scope.plans = [
     {id: 1, name: '',  plan: ''},
     {id: 2, name: '',  plan: ''},

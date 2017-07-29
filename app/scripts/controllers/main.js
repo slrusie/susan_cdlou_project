@@ -5,6 +5,7 @@ function MainCtrl($scope, $filter, $http, dataService) {
     var plans = response.data.plans;
     $scope.plans =  plans;
   });
+   
 $scope.checkPlan = function(data, id) {
     if (id === plan.name, plan.plan && data !== plan.name, plan.plan) {
       return plan;
@@ -23,7 +24,7 @@ $scope.checkPlan = function(data, id) {
 
 
   $scope.addPlan = function() {
-    $scope.plans.unshift({name: "This is a new plan.", plan: "This is a new plan",
+$scope.plans.unshift({name: "This is a new plan.", plan: "This is a new plan",
                       completed: false});
   };
 
