@@ -9,27 +9,25 @@
 
 <body ng-app = "lessonPlanApp" ng-controller="MainCtrl">
 
-<ng-include src="'templates/index.html'"></ng-include>
 <h1>LESSON PLAN</h1>
 <table class="table table-hover table-condensed table-striped table-bordered">
     <tr ng-repeat="plan in plans">
       <td>
         <!-- editable plan.name -->
-	<span editable-text="plan.name" e-name="name" e-form="rowform" onbeforesave="checkName($data, plan.id)">
-     <label ng-hide="save" ng-click="save=true">{{plan.name}}</label>
-	 <input ng-show="save" ng-blur="save = false" class="save-label" type="text" ng-model="plan.name" ng-change="plan.saved = true"/>
-	 </span>
+	   <span editable-text="plan.name" e-name="name" e-form="rowform" >
+          {{ plan.name || 'empty' }}
+        </span>
+
       </td>
       <td>
         <!-- editable plan.plan -->
-	<span editable-text="plan.plan" e-name="plan" e-form="rowform" onbeforesave="checkPlan($data, plan.id)">
-	<label ng-hide="editing" ng-click="editing=true">{{plan.plan}}</label>
-	<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="plan.plan" ng-change="plan.edited = true"/>
-	</span>
+	   <span editable-text="plan.plan" e-name="name" e-form="rowform">
+          {{ plan.plan || 'empty' }}
+        </span>
       </td>
       <td style="white-space: nowrap">
         <!-- form -->
-        <form editable-form name="rowform" onbeforesave="savePlan($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
+        <form editable-form name="rowform" onbeforesave="savePlan($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == plan">
           <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
             save
           </button>

@@ -6,18 +6,16 @@ function MainCtrl($scope, $filter, $http, dataService) {
     $scope.plans =  plans;
   });
    
-$scope.checkPlan = function(data, id) {
-    if (id === plan.name, plan.plan && data !== plan.name, plan.plan) {
+$scope.checkPlan = function(data, name) {
+    if (name === plan.name, plan.plan && data !== plan.name, plan.plan) {
       return plan;
     }
   };
   $scope.savePlan = function(data, id) {
-    //save plan
-    angular.extend(data, {id: id});
-    return $http.post('/savePlan', data);
+    return dataService.savePlans($scope.plans);
   };
 
-  // remove user
+  // remove plan
   $scope.removePlan = function(index) {
     $scope.plans.splice(index, 1);
   };

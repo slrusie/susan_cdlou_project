@@ -7,7 +7,8 @@ var Plans = [
     {"name": "ART", "plan": "Painting"},
 	{"name": "STORIES", "plan": "Where The Wild Things Are"},
 	{"name": "FINE MOTOR ACTIVITIES", "plan": "Blocks"},
-	{"name": "GROSS MOTOR ACTIVITIES", "plan": "Dancing"}
+	{"name": "GROSS MOTOR ACTIVITIES", "plan": "Dancing"},
+	{"name": "History", "plan": "Music History"}
 	
 ];
 

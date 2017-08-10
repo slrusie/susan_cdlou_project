@@ -9,6 +9,7 @@ Once you have done that, you can install the Node modules as follows:
 *npm install body-parser --save -E
 *npm install webpack --save-dev-exact
 *npm install bootstrap@3
+*npm install angular-xeditable --save-dev-exact
 
 If you have Node installed globally, you should just be able to type "npm install" in the command line and all of the node modules will be installed for you simultaneously. Finally, you must install MongoDB.  Here is the link to the 
 website: https://www.mongodb.org/downloads.  Here is also a link to the installation guide for Windows: https://treehouse.github.io/installation-guides/windows/mongo-windows.html For a Mac, you need to use this link: 

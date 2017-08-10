@@ -11,6 +11,10 @@ body {
 	border: #5a6772;
 }
 
+.editable-hide {
+	display: none;
+}
+
 a {
   color: #3f8abf;
   text-decoration: none; }

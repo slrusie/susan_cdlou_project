@@ -38,8 +38,8 @@ $scope.checkPlan = function(data, id) {
   };
 });
 
-    dataService.savePlans(filteredPlans)
-      .finally($scope.resetPlanState());
-  }
+    // dataService.savePlans(filteredPlans)
+      // .finally($scope.resetPlanState());
+  // }
 
 module.exports = PlanCtrl;
