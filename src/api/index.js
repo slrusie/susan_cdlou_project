@@ -40,12 +40,13 @@ router.put('/plans/:id', function(req, res) {
 });
 
 router.delete('/plans/:id', function(req, res) {
-  var id = req.params.id;
-  Plan.findByIdAndRemove(id, function(err, result) {
+  var planId = req.params.id;
+  Plan.findByIdAndRemove(planId, function(err, result) {
     if (err) {
-      return res.status(500).json({ err: err.message });
-    }
-	  res.json({ message: 'Plan Deleted' });
+		res.status(500).json({ err: err.message });
+    } else {
+		res.json({ message: 'Plan Deleted' });
+	 }
   });
 });
 

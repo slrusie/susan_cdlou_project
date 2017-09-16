@@ -15,7 +15,7 @@ function DataService ($http, $q) {
     });
   };
 
-  this.savePlans	 = function(plans) {
+  this.savePlans = function(plans) {
     var queue = [];
     plans.forEach(function(plan) {
       var request;
@@ -25,8 +25,8 @@ function DataService ($http, $q) {
         request = $http.put('/api/plans/' + plan._id, plan).then(function(result) {
           plan = result.data.plan;
           return plan;
-        });
-      }
+        })
+      };
       queue.push(request);
     });
     return $q.all(queue).then(function(results) {

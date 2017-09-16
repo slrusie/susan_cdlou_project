@@ -55,8 +55,8 @@ webpackJsonp([0],[
 	        request = $http.put('/api/plans/' + plan._id, plan).then(function(result) {
 	          plan = result.data.plan;
 	          return plan;
-	        });
-	      }
+	        })
+	      };
 	      queue.push(request);
 	    });
 	    return $q.all(queue).then(function(results) {
@@ -86,7 +86,7 @@ webpackJsonp([0],[
 
 	function PlanDirective () {
 	  return {
-	    templateUrl: 'templates/plan.html',
+	    templateUrl: 'public/index.html',
 	    replace: true,
 	    controller: 'planCtrl'
 	  }
@@ -103,6 +103,10 @@ webpackJsonp([0],[
 	var angular = __webpack_require__(1);
 
 	angular.module('lessonPlanApp').controller('MainCtrl', __webpack_require__(8));
+	angular.module('lessonPlanApp').controller('PlanCtrl', __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./plan\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+
+
+
 
 
 
@@ -113,34 +117,25 @@ webpackJsonp([0],[
 
 	'use strict';
 
-	function MainCtrl($scope, $filter, $http, dataService) {
+	function MainCtrl ($scope, dataService) {	
+
 	  dataService.getPlans(function(response){
 	    var plans = response.data.plans;
 	    $scope.plans =  plans;
-	  });
-	   
-	$scope.checkPlan = function(data, name) {
-	    if (name === plan.name, plan.plan && data !== plan.name, plan.plan) {
-	      return plan;
-	    }
-	  };
-	  $scope.savePlan = function(data, id) {
-	    return dataService.savePlans($scope.plans);
-	  };
-
+		});
+	 
 	  // remove plan
 	  $scope.removePlan = function(index) {
 	    $scope.plans.splice(index, 1);
 	  };
 
-
-	  $scope.addPlan = function() {
+	  // add new plan
+	 $scope.addPlan = function() {
 	$scope.plans.unshift({name: "This is a new plan.", plan: "This is a new plan",
 	                      completed: false});
 	  };
 
 	}
-
 	module.exports = MainCtrl;
 
 

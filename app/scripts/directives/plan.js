@@ -2,7 +2,7 @@
 
 function PlanDirective () {
   return {
-    templateUrl: 'templates/plan.html',
+    templateUrl: 'public/index.html',
     replace: true,
     controller: 'planCtrl'
   }
