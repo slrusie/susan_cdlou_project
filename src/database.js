@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/mean-plan', function(err) {
+mongoose.connect('mongodb://localhost/mean-lesson-plan', function(err) {
 	if(err) {
     console.log('Failed connecting to MongoDB!');
 	} else {

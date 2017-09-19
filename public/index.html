@@ -27,6 +27,7 @@
       </td>
       <td style="white-space: nowrap">
         <!-- form -->
+		<form id="plan"
         <form editable-form name="rowform" onbeforesave="savePlan($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == plan">
           <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
             save
@@ -47,18 +48,17 @@
 </div>
 
 <script type="text/javascript">
-    function AddItem()
+function AddItem()
     {
         // Create an Option object       
         var opt = document.createElement("opt");        
-
         // Assign text and value to Option object
         opt.text = "New Value";
         opt.value = "New Value";
-
         // Add an Option object to Drop Down List Box
         document.getElementById('<%=DropDownList.PlanID%>').options.add(opt);
     }
+
 </script>
 
   <script src="/scripts/vendor.bundle.js"></script>
