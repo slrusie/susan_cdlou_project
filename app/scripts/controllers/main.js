@@ -19,4 +19,4 @@ $scope.plans.unshift({name: "This is a new plan.", plan: "This is a new plan",
   };
 
 }
-module.exports = MainCtrl;
+		module.exports = MainCtrl;

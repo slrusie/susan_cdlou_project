@@ -50,7 +50,7 @@ webpackJsonp([0],[
 	    plans.forEach(function(plan) {
 	      var request;
 	      if(!plan._id) {
-	        request = $http.post('/api/plans', plan);
+	        request = $http.post('/api/plans', plan)
 	      } else {
 	        request = $http.put('/api/plans/' + plan._id, plan).then(function(result) {
 	          plan = result.data.plan;
@@ -68,6 +68,7 @@ webpackJsonp([0],[
 
 	module.exports = DataService;
 
+
 /***/ },
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
@@ -77,6 +78,7 @@ webpackJsonp([0],[
 	var angular = __webpack_require__(1);
 
 	angular.module('lessonPlanApp').directive('plan', __webpack_require__(6));
+
 
 /***/ },
 /* 6 */
@@ -111,6 +113,8 @@ webpackJsonp([0],[
 
 
 
+
+
 /***/ },
 /* 8 */
 /***/ function(module, exports) {
@@ -136,8 +140,7 @@ webpackJsonp([0],[
 	  };
 
 	}
-	module.exports = MainCtrl;
-
+			module.exports = MainCtrl;
 
 /***/ },
 /* 9 */
@@ -145,49 +148,35 @@ webpackJsonp([0],[
 
 	'use strict';
 
-	app.controller('EditableRowCtrl', function($scope, $filter, $http) {
-		
-	$scope.plans = [
-	    {id: 1, name: '',  plan: ''},
-	    {id: 2, name: '',  plan: ''},
-	    {id: 3, name: '',  plan: ''},
-	    {id: 4, name: '',  plan: ''},
-	    {id: 5, name: '',  plan: ''}
-	  ]; 
+	  function PlanCtrl ($scope, dataService) {
 
-	$scope.checkPlan = function(data, id) {
-		if (id === plan) {
-	      return plan.length;
-	    }
+	  $scope.deletePlan = function(plan, index) {
+	    dataService.deletePlan(plan).then(function() {
+	      $scope.plans.splice(index, 1);
+	    });
 	  };
 
-	 $scope.savePlan = function(data, id) {
-	    //$scope plan not updated yet
-	    angular.extend(data, {id: id});
-	    return $http.post('/savePlan', data);
+	  $scope.savePlans = function() {
+	    var filteredPlans = $scope.plans.filter(function(plan){
+	      if(plan.edited) {
+	        return plan
+	      };
+	    })
+	    dataService.savePlans(filteredPlans)
+	      .finally($scope.resetPlanState());
 	  };
 
-	  // remove plan
-	  $scope.removePlan = function(index) {
-	    $scope.users.splice(index, 1);
-	  };
-
-	  // add plan
-	  $scope.addPlan = function() {
-	    $scope.inserted = {
-	      id: $scope.plan.length+1,
-	      name: '',
-	      plan: ''
-	    };
-	    $scope.plan.push($scope.inserted);
-	  };
-	});
-
-	    // dataService.savePlans(filteredPlans)
-	      // .finally($scope.resetPlanState());
-	  // }
+	  $scope.resetPlanState = function() {
+	      $scope.plans.forEach(function(plan) {
+	         plan.edited = false;
+	      });
+	  }
+	}
 
 	module.exports = PlanCtrl;
+
+
+
 
 
 

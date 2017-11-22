@@ -20,7 +20,7 @@ function DataService ($http, $q) {
     plans.forEach(function(plan) {
       var request;
       if(!plan._id) {
-        request = $http.post('/api/plans', plan);
+        request = $http.post('/api/plans', plan)
       } else {
         request = $http.put('/api/plans/' + plan._id, plan).then(function(result) {
           plan = result.data.plan;

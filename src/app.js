@@ -1,14 +1,9 @@
-//Create a daily lesson plan 
 
-//Add list items that include cirle time, art, gross motor activities, and fine motor activities for preschoolers
 
-//Create a database with a list of items for each category to add to the blank lesson plan 
-//Add "+" and "-" glyphs in blank spaces next to each category
-//Show "+" and "-" glyhys when the mouse is hovering over the glyphs
-//Hide "+" and "-" glyphs when moouse leaves the blank space the glyphs are in
-//Click on "+" to create a dropbox with a list of activities to choose from in each category and the ability to add new ones to the dropbox
-//Click on "-" to remove an item from the blank space 
-//Be able to copy and paste items in the database into the appropriate spots on the blank lesson plan
+//Create a database of lesson plans for a day that include subjects and corressponding activites for music, art, stories, gross motor activities, and fine motor activities for preschoolers
+//Edit, save, or delete existing lesson plan subjects and/or corresponding activities for each subject
+//Add new lesson plan subjects and corresponding activitiess to the existing lesson plan to add to the curriculum
+//Create a dropbox menu with a list of lesson plan subjects and activities to choose from in each category that is consistantly added to the database to click on and select once they have been saved to the database and the ability to add new ones to the dropbox menu
 
 'use strict';
 
