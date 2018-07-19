@@ -2,7 +2,10 @@
 
 var angular = require('angular');
 
-angular.module('lessonPlanApp', ["xeditable"]);
+var app = angular.module('lessonPlanApp', ["xeditable"]);
+app.run(['editableOptions', function(editableOptions) {
+    editableOptions.theme = 'bs3';
+}]);
 
 require('./scripts/services');
 require('./scripts/directives');

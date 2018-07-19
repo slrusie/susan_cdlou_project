@@ -14,20 +14,32 @@
   <div ng-app="lessonPlanApp" ng-controller="MainCtrl">
     <h1>LESSON PLAN</h1>
     <table class="table table-hover table-condensed table-striped table-bordered">
-      <tr ng-repeat="plan in plans" onchange="getPlans.optionValue();">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Plan</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="plan in plans">
           <td>
-          <span editable-text="plan.name" e-name="name" e-form="rowform">
-            {{ plan.name || 'empty' }}
-          </span>
+            <span editable-text="plan.name" e-name="name" e-form="rowform">
+              {{ plan.name || 'empty' }}
+            </span>
+          </td>
           <td>
-            <select id="list">
-              <option value ng-repeat="subPlan in plan.plans">{{ subPlan || 'empty' }}</option>
-            </select>
-            <input type="text" ng-model="newSubPlan" id="new-sub-plan">
-            <button ng-click="addPlanToSubject(newSubPlan, plan)">Add</button>
+            <!--  editable-select gives you a dropdown to select a subplan. The input beneath it will allow you to
+                  insert a new plan into the plan's subplans -->
+            <span editable-select="plan.selectedPlanIndex" e-name="selectedPlan" e-form="rowform" e-ng-options="index as p for (index, p) in plan.plans">
+              <!--  the selectedPlanIndex indicates which subplan is currently selected -->
+              {{ plan.plans[plan.selectedPlanIndex] }}
+            </span>
+            <input type="text" ng-show="rowform.$visible" ng-model="newSubPlan" id="new-sub-plan">
+            <button ng-show="rowform.$visible" ng-click="addPlanToSubject(newSubPlan, plan)">Add</button>
           </td>
           <td style="white-space: nowrap">
-            <form editable-form name="rowform" onbeforesave="savePlan($data, plan.id)" ng-show="rowform.$visible" class="form-buttons form-inline"
+            <form id="plan" editable-form name="rowform" onbeforesave="savePlan($data, plan._id)" ng-show="rowform.$visible" class="form-buttons form-inline"
               shown="inserted == plan">
               <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
                 save
@@ -36,12 +48,13 @@
                 cancel
               </button>
             </form>
-            <div class=" buttons" ng-show="!rowform.$visible">
+            <div class="buttons" ng-show="!rowform.$visible">
               <button type="button" class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-            <button type="button" class="btn btn-danger" ng-click="removePlan($index)">del</button>
+              <button type="button" class="btn btn-danger" ng-click="rowform.$show()">del</button>
             </div>
           </td>
-      </tr>
+        </tr>
+      </tbody>
     </table>
     <button type="button " class="btn btn-default" ng-click="addPlan() ">Add row</button>
   </div>
@@ -58,11 +71,6 @@
       newOption.appendChild(newOptionVal);
       select.insertBefore(newOption, select.firstChild);
     }
-  </script>
-   <script>
-    $(document).ready(function () {
-      $('<select id="select"></option>').appendTo("#ddList");
-    });
   </script>
   <script>
     $(document).ready(function () {

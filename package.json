@@ -16,7 +16,7 @@
     "mongoose": "4.7.7"
   },
   "devDependencies": {
-    "angular-xeditable": "^0.8.0",
+    "angular-xeditable": "^0.8.1",
     "webpack": "^1.13.3"
   }
 }

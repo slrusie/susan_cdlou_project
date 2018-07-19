@@ -6,7 +6,10 @@ webpackJsonp([0],[
 
 	var angular = __webpack_require__(1);
 
-	angular.module('lessonPlanApp', ["xeditable"]);
+	var app = angular.module('lessonPlanApp', ["xeditable"]);
+	app.run(['editableOptions', function(editableOptions) {
+	    editableOptions.theme = 'bs3';
+	}]);
 
 	__webpack_require__(3);
 	__webpack_require__(5);
@@ -63,7 +66,6 @@ webpackJsonp([0],[
 	      console.log("I saved " + plans.length + " plans!");
 	    });
 	  };
-
 	}
 
 	module.exports = DataService;
@@ -122,35 +124,41 @@ webpackJsonp([0],[
 	'use strict';
 
 	function MainCtrl($scope, dataService) {
-
-	  dataService.getPlans(function (response) {
+	  dataService.getPlans(function(response) {
 	    var plans = response.data.plans;
 	    $scope.plans = plans;
 	  });
 
 	  // remove plan
-	  $scope.removePlan = function (index) {
+	  $scope.removePlan = function(index) {
 	    $scope.plans.splice(index, 1);
 	  };
 
 	  // add new plan
-	  $scope.addPlan = function () {
-	    $scope.plans.unshift({
-	      name: "This is a new plan.",
-	      plan: "This is a new plan",
+	  $scope.addPlan = function() {
+	    $scope.inserted = {
+	      name: '',
+	      plans: [],
+	      selectedPlanIndex: 0,
 	      completed: false
-	    });
+	    };
+
+	    $scope.plans.unshift($scope.inserted);
 	  };
 
-	  $scope.addPlanToSubject = function (plan, subject) {
-	    console.log(plan, subject);
+	  $scope.addPlanToSubject = function(planName, subject) {
 	    if (!subject.plans) subject.plans = [];
-	    subject.plans.push(plan);
-	    document.querySelectorAll('#new-sub-plan').forEach(el => el.value = null);
-	  }
+	    subject.plans.push(planName);
+	    subject.selectedPlanIndex = subject.plans.indexOf(planName);
+	    document.querySelectorAll('#new-sub-plan').forEach(el => (el.value = null));
+	  };
 
+	  $scope.savePlan = function(data, id) {
+	    dataService.savePlans($scope.plans);
+	  };
 	}
 	module.exports = MainCtrl;
+
 
 /***/ },
 /* 9 */
