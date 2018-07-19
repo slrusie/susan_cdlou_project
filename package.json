@@ -17,6 +17,6 @@
   },
   "devDependencies": {
     "angular-xeditable": "^0.8.0",
-    "webpack": "1.13.3"
+    "webpack": "^1.13.3"
   }
 }

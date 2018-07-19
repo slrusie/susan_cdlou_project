@@ -121,26 +121,36 @@ webpackJsonp([0],[
 
 	'use strict';
 
-	function MainCtrl ($scope, dataService) {	
+	function MainCtrl($scope, dataService) {
 
-	  dataService.getPlans(function(response){
+	  dataService.getPlans(function (response) {
 	    var plans = response.data.plans;
-	    $scope.plans =  plans;
-		});
-	 
+	    $scope.plans = plans;
+	  });
+
 	  // remove plan
-	  $scope.removePlan = function(index) {
+	  $scope.removePlan = function (index) {
 	    $scope.plans.splice(index, 1);
 	  };
 
 	  // add new plan
-	 $scope.addPlan = function() {
-	$scope.plans.unshift({name: "This is a new plan.", plan: "This is a new plan",
-	                      completed: false});
+	  $scope.addPlan = function () {
+	    $scope.plans.unshift({
+	      name: "This is a new plan.",
+	      plan: "This is a new plan",
+	      completed: false
+	    });
 	  };
 
+	  $scope.addPlanToSubject = function (plan, subject) {
+	    console.log(plan, subject);
+	    if (!subject.plans) subject.plans = [];
+	    subject.plans.push(plan);
+	    document.querySelectorAll('#new-sub-plan').forEach(el => el.value = null);
+	  }
+
 	}
-			module.exports = MainCtrl;
+	module.exports = MainCtrl;
 
 /***/ },
 /* 9 */
@@ -148,17 +158,17 @@ webpackJsonp([0],[
 
 	'use strict';
 
-	  function PlanCtrl ($scope, dataService) {
+	function PlanCtrl($scope, dataService) {
 
-	  $scope.deletePlan = function(plan, index) {
-	    dataService.deletePlan(plan).then(function() {
+	  $scope.deletePlan = function (plan, index) {
+	    dataService.deletePlan(plan).then(function () {
 	      $scope.plans.splice(index, 1);
 	    });
 	  };
 
-	  $scope.savePlans = function() {
-	    var filteredPlans = $scope.plans.filter(function(plan){
-	      if(plan.edited) {
+	  $scope.savePlans = function () {
+	    var filteredPlans = $scope.plans.filter(function (plan) {
+	      if (plan.edited) {
 	        return plan
 	      };
 	    })
@@ -166,22 +176,14 @@ webpackJsonp([0],[
 	      .finally($scope.resetPlanState());
 	  };
 
-	  $scope.resetPlanState = function() {
-	      $scope.plans.forEach(function(plan) {
-	         plan.edited = false;
-	      });
+	  $scope.resetPlanState = function () {
+	    $scope.plans.forEach(function (plan) {
+	      plan.edited = false;
+	    });
 	  }
 	}
 
 	module.exports = PlanCtrl;
-
-
-
-
-
-
-
-
 
 /***/ }
 ]);
