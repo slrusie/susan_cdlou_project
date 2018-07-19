@@ -6,7 +6,10 @@ webpackJsonp([0],[
 
 	var angular = __webpack_require__(1);
 
-	angular.module('lessonPlanApp', ["xeditable"]);
+	var app = angular.module('lessonPlanApp', ["xeditable"]);
+	app.run(['editableOptions', function(editableOptions) {
+	    editableOptions.theme = 'bs3';
+	}]);
 
 	__webpack_require__(3);
 	__webpack_require__(5);
@@ -63,7 +66,6 @@ webpackJsonp([0],[
 	      console.log("I saved " + plans.length + " plans!");
 	    });
 	  };
-
 	}
 
 	module.exports = DataService;
@@ -121,26 +123,42 @@ webpackJsonp([0],[
 
 	'use strict';
 
-	function MainCtrl ($scope, dataService) {	
-
-	  dataService.getPlans(function(response){
+	function MainCtrl($scope, dataService) {
+	  dataService.getPlans(function(response) {
 	    var plans = response.data.plans;
-	    $scope.plans =  plans;
-		});
-	 
+	    $scope.plans = plans;
+	  });
+
 	  // remove plan
 	  $scope.removePlan = function(index) {
 	    $scope.plans.splice(index, 1);
 	  };
 
 	  // add new plan
-	 $scope.addPlan = function() {
-	$scope.plans.unshift({name: "This is a new plan.", plan: "This is a new plan",
-	                      completed: false});
+	  $scope.addPlan = function() {
+	    $scope.inserted = {
+	      name: '',
+	      plans: [],
+	      selectedPlanIndex: 0,
+	      completed: false
+	    };
+
+	    $scope.plans.unshift($scope.inserted);
 	  };
 
+	  $scope.addPlanToSubject = function(planName, subject) {
+	    if (!subject.plans) subject.plans = [];
+	    subject.plans.push(planName);
+	    subject.selectedPlanIndex = subject.plans.indexOf(planName);
+	    document.querySelectorAll('#new-sub-plan').forEach(el => (el.value = null));
+	  };
+
+	  $scope.savePlan = function(data, id) {
+	    dataService.savePlans($scope.plans);
+	  };
 	}
-			module.exports = MainCtrl;
+	module.exports = MainCtrl;
+
 
 /***/ },
 /* 9 */
@@ -148,17 +166,17 @@ webpackJsonp([0],[
 
 	'use strict';
 
-	  function PlanCtrl ($scope, dataService) {
+	function PlanCtrl($scope, dataService) {
 
-	  $scope.deletePlan = function(plan, index) {
-	    dataService.deletePlan(plan).then(function() {
+	  $scope.deletePlan = function (plan, index) {
+	    dataService.deletePlan(plan).then(function () {
 	      $scope.plans.splice(index, 1);
 	    });
 	  };
 
-	  $scope.savePlans = function() {
-	    var filteredPlans = $scope.plans.filter(function(plan){
-	      if(plan.edited) {
+	  $scope.savePlans = function () {
+	    var filteredPlans = $scope.plans.filter(function (plan) {
+	      if (plan.edited) {
 	        return plan
 	      };
 	    })
@@ -166,22 +184,14 @@ webpackJsonp([0],[
 	      .finally($scope.resetPlanState());
 	  };
 
-	  $scope.resetPlanState = function() {
-	      $scope.plans.forEach(function(plan) {
-	         plan.edited = false;
-	      });
+	  $scope.resetPlanState = function () {
+	    $scope.plans.forEach(function (plan) {
+	      plan.edited = false;
+	    });
 	  }
 	}
 
 	module.exports = PlanCtrl;
-
-
-
-
-
-
-
-
 
 /***/ }
 ]);

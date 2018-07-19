@@ -17,7 +17,9 @@ router.get('/plans', function(req, res) {
 
 router.post('/plans', function(req, res) {
   var plan = req.body;
-	Plan.create(plans, function(err, plan) {
+  // this was causing an error because it was trying
+  // to create "plans", but "plans" was undefined
+	Plan.create(plan, function(err, plan) {
     if (err) {
       return res.status(500).json({ err: err.message });
     }

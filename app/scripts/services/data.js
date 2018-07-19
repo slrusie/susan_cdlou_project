@@ -33,7 +33,6 @@ function DataService ($http, $q) {
       console.log("I saved " + plans.length + " plans!");
     });
   };
-
 }
 
 module.exports = DataService;
