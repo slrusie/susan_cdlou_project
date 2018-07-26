@@ -1,105 +1,191 @@
-<html>
 <html lang="en">
-  <head>
-<title></title>
+
+
+
+<head>
+
+  <title></title>
+
   <meta charset="windows-1252">
+
   <meta charset="viewport" content="width=device-width, initial scale=1.0">
-<link rel="stylesheet" href="/style/style.css" type="text/css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link rel="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></link>
+
+  <link rel="stylesheet" href="/style/style.css" type="text/css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+
+    crossorigin="anonymous">
+
+
+
 </head>
-<body ng-app = "lessonPlanApp" ng-controller="MainCtrl">
-<h1>LESSON PLAN</h1>
-<table class="table table-hover table-condensed table-striped table-bordered">
-  <tr ng-repeat="plan in plans" onchange="getSelectPlans.optionValue();">
-   <td>
-       <select id ="list">
-       <option value>
-        <span editable-text="plan.name" e-name="name" e-form="rowform" >
-          {{ plan.name || 'empty' }}
-        </span>
-        </option>
-    </select>
-	<input type="text" id="val">
-	<button onclick="insertValue();">Add</button>
-   
-<script>
-  
-function  getSelectValue()
-  {
-  var selectedValue = document.getElementById("select").value;
-  console.log(selectedValue);
-  }
-  
- function insertValue()
-  {
-  var select = document.getElementById("select"),
-    txtVal = document.getElementById("val").value,
-    newOption = document.createElement("OPTION"),
-    newOptionVal = document.createTextNode(txtVal);
-  
-newOption.appendChild(newOptionVal);
-  select.insertBefore(newOption,select.lastChild);
-  }
+
+
+
+<body>
+
+  <div ng-app="lessonPlanApp" ng-controller="MainCtrl">
+
+    <h1>LESSON PLAN</h1>
+
+    <table class="table table-hover table-condensed table-striped table-bordered">
+
+      <thead>
+
+        <tr>
+
+          <th>Subject</th>
+
+          <th>Plan</th>
+
+          <th>Actions</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr ng-repeat="plan in plans">
+
+          <td>
+
+            <span editable-text="plan.name" e-name="name" e-form="rowform">
+
+              {{ plan.name || 'empty' }}
+
+            </span>
+
+          </td>
+
+          <td>
+
+            <!--  editable-select gives you a dropdown to select a subplan. The input beneath it will allow you to
+
+                  insert a new plan into the plan's subplans -->
+
+            <span editable-select="plan.selectedPlanIndex" e-name="selectedPlan" e-form="rowform" e-ng-options="index as p for (index, p) in plan.plans">
+
+              <!--  the selectedPlanIndex indicates which subplan is currently selected -->
+
+              {{ plan.plans[plan.selectedPlanIndex] }}
+
+            </span>
+
+            <input type="text" ng-show="rowform.$visible" ng-model="newSubPlan" id="new-sub-plan">
+
+            <button ng-show="rowform.$visible" ng-click="addPlanToSubject(newSubPlan, plan)">Add</button>
+
+          </td>
+
+          <td style="white-space: nowrap">
+
+            <form id="plan" editable-form name="rowform" onbeforesave="savePlan($data, plan._id)" ng-show="rowform.$visible" class="form-buttons form-inline"
+
+              shown="inserted == plan">
+
+              <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+
+                save
+
+              </button>
+
+              <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+
+                cancel
+
+              </button>
+
+            </form>
+
+            <div class="buttons" ng-show="!rowform.$visible">
+
+              <button type="button" class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+
+              <button type="button" class="btn btn-danger" ng-click="removePlan($index)">del</button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+    <button type="button " class="btn btn-default" ng-click="addPlan() ">Add row</button>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  <script src="/scripts/vendor.bundle.js"></script>
+
+  <script src="/scripts/plan.bundle.js"></script>
+
+  <script>
+
+    function insertValue() {
+
+      var select = document.getElementById("select"),
+
+        txtVal = document.getElementById("val").value,
+
+        newOption = document.createElement("OPTION"),
+
+        newOptionVal = document.createTextNode(txtVal);
+
+
+
+      newOption.appendChild(newOptionVal);
+
+      select.insertBefore(newOption, select.firstChild);
+
+    }
+
   </script>
-   <td>
 
-<select id ="list">
-       <option value>
-        <span editable-text="plan.plan" e-name="name" e-form="rowform" >
-          {{ plan.plan|| 'empty' }}
-        </span>
-        <option>
-    </select>
-	<input type="text" id="val">
-	<button onclick="insertValue();">Add</button>
-   
-<script>
-  
-function  getSelectValue()
-  {
-  var selectedValue = document.getElementById("select").value;
-  console.log(selectedValue);
-  }
-  
- function insertValue()
-  {
-  var select = document.getElementById("select"),
-    txtVal = document.getElementById("val").value,
-    newOption = document.createElement("OPTION"),
-    newOptionVal = document.createTextNode(txtVal);
-  
-newOption.appendChild(newOptionVal);
-  select.insertBefore(newOption,select.lastChild);
-  }
-  </script
-  
- </td>
-   <td style="white-space: nowrap">
-    <!-- form -->
-    <form id="plan"
-    <form editable-form name="rowform" onbeforesave="savePlan($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == plan">
-     <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
-      save
-     </button>
-     <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
-      cancel
-     </button>
-    </form>
-    <div class="buttons" ng-show="!rowform.$visible">
-      <button type="button" class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-      <button type="button" class="btn btn-danger" ng-click="removePlan($index)">del</button>
-    </div>
-   </td>
-  </tr>
- </table>
- <button type="button" class="btn btn-default" ng-click="addPlan()">Add row</button>
-</div>
- <script src="/scripts/vendor.bundle.js"></script>
- <script src="/scripts/plan.bundle.js"></script>
+  <script>
+
+    $(document).ready(function () {
+
+      $('<option value="option"></option>').appendTo("#ddList");
+
+    });
+
+  </script>
+
+
+
+  <script>
+
+    $(document).ready(function () {
+
+      $("#select").click(function () {
+
+        $("id").hide();
+
+      });
+
+      $("#select").click(function () {
+
+        $("id").show();
+
+      });
+
+    });
+
+  </script>
+
 </body>
-</html
 
 
 
------ Wednesday, November 15th -----
+</html>
+
+
+
+
+
+

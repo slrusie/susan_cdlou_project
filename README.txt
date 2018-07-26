@@ -21,7 +21,8 @@ are once you see a list of all those files for this project), type "mongod" whic
 Nodemon has also successfully connected to Mongo or the app won't work.  In the third command line window, do the same thing and type in "webpack" to get all the angular data to appear.  After Mongo, Node, and Webpack are 
 started, run the project in the browser by typing in "localhost:3000" in the browser window at the top of the page. You should see a table listing all of the subjects and activities for a one day lesson plan for preschoolers.   
 In the box to the right of the subject names, there is a list of default activities to go with that subject.  You can edit the default subjects and/or activities by selecting either one, typing in a new subject and/or activity, and
-save it to or delete it from the database. You can also select an subject and/or activity from a dropdown menu that appear and click on the subject or activity to be edited, showing all subjects and/or activities that have been added to 
-the database as each time they are edited and saved, which can either be saved or deleted as well or you can select the button "Add Row" to add your own subject and activity that can be saved, edited, and deleted to the database.
-Lastly,if you can refresh the page, it will go back to its default settings.
+save it to or delete it from the database. You can also select a subject and/or activity from the dropdown menu that appear when you click on the subject or activity to be edited in the editing label, 
+which shows all subjects and/or activities that have been added to the database as each time they are edited and saved.  The dropdown menus for the subject and plan are hidden until you click on the edit button and any plans you add
+to each dropdown menu are hidden as well until you click on the editing label itself.  You can also select the button "Add Row" to add your own subject and activity that can be saved, edited, and deleted to the database.  
+ Lastly, if you can refresh the page, it will go back to its default settings.  Any new plans added to the lesson plan will also re-appear with the default settings.
 

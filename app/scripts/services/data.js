@@ -5,15 +5,14 @@ function DataService ($http, $q) {
   this.getPlans = function(cb) {
     $http.get('/api/plans').then(cb);
   };
-
-  this.deletePlan = function(plan) {
+this.deletePlan = function(plan) {
     if (!plan._id) {
-      return $q.resolve();
+		return $q.resolve();
     }
-    return $http.delete('/api/plans/' + plan._id).then(function() {
-      console.log("I deleted the " + plan.name + " plan!");
+    return $http.delete('/api/plans/' + plan._id).then(function () {
+        console.log("I deleted the " + plan.name + " plan"); 
     });
-  };
+};
 
   this.savePlans = function(plans) {
     var queue = [];
@@ -33,7 +32,6 @@ function DataService ($http, $q) {
       console.log("I saved " + plans.length + " plans!");
     });
   };
-
 }
 
 module.exports = DataService;
